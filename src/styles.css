@@ -1,0 +1,130 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-serif: "DM Serif Display", Georgia, serif;
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-plum: var(--plum);
+  --color-plum-foreground: var(--plum-foreground);
+  --color-lilac: var(--lilac);
+  --color-ivory: var(--ivory);
+  --color-success: var(--success);
+}
+
+:root {
+  --radius: 0.25rem;
+  --background: oklch(0.986 0.004 75);      /* warm ivory #FCFAF7 */
+  --foreground: oklch(0.255 0.012 310);     /* #29252D */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.255 0.012 310);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.255 0.012 310);
+  --primary: oklch(0.45 0.1 305);           /* #68458F */
+  --primary-foreground: oklch(0.99 0.003 310);
+  --secondary: oklch(0.92 0.022 310);       /* soft lavender #EAE2F2 */
+  --secondary-foreground: oklch(0.29 0.05 315);
+  --muted: oklch(0.96 0.01 315);            /* pale lilac #F5F0F8 */
+  --muted-foreground: oklch(0.54 0.015 310);/* #77717C */
+  --accent: oklch(0.92 0.022 310);
+  --accent-foreground: oklch(0.29 0.05 315);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.915 0.01 315);          /* #E8E2EB */
+  --input: oklch(0.915 0.01 315);
+  --ring: oklch(0.45 0.1 305);
+  --plum: oklch(0.29 0.05 315);             /* #352440 */
+  --plum-foreground: oklch(0.96 0.01 315);
+  --lilac: oklch(0.96 0.01 315);
+  --ivory: oklch(0.986 0.004 75);
+  --success: oklch(0.5 0.09 155);           /* #347653 */
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.01em; }
+}
+
+@utility wordmark {
+  font-family: var(--font-serif);
+  letter-spacing: 0.42em;
+  padding-left: 0.42em;
+}
+
+@utility eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+@utility btn-primary {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  background: var(--primary); color: var(--primary-foreground);
+  padding: 0.95rem 1.75rem; font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase; border-radius: var(--radius);
+  transition: background 0.25s, transform 0.25s;
+  &:hover { background: var(--plum); }
+  &:active { transform: scale(0.98); }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+@utility btn-outline {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  border: 1px solid var(--plum); color: var(--plum);
+  padding: 0.95rem 1.75rem; font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase; border-radius: var(--radius);
+  transition: background 0.25s, color 0.25s;
+  &:hover { background: var(--plum); color: var(--plum-foreground); }
+}
+
+@utility link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px; background-repeat: no-repeat; background-position: 0 100%;
+  transition: background-size 0.3s;
+  &:hover { background-size: 100% 1px; }
+}
+
+@utility chip {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  border: 1px solid var(--border); background: var(--card);
+  padding: 0.45rem 0.9rem; font-size: 0.8rem; border-radius: 999px;
+  transition: all 0.2s;
+  &:hover { border-color: var(--primary); }
+  &[data-active="true"] { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); }
+}
+
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@utility animate-rise { animation: rise 0.8s cubic-bezier(.2,.7,.2,1) both; }
